@@ -1,0 +1,32 @@
+# Static Cost Ledger
+
+Frozen migration inventory: one Warrior dataset, old/new bones 19/16, slots 10/15,
+skins 3/1, skin entries 17/18 and animations 8/8. New animation keyframes total
+207; the largest individual animation contains 34 keyframes. The source export
+contains three files. No tool scans the AssetDatabase or asset directories.
+
+Inspection loads one skeleton asset and its assigned controller. Metadata records
+are counted before result materialization; skins contribute their attachment
+counts without a skins-by-slots cross-product. `maxRecords` is 1..8192, default
+2048. Work and result memory are linear in the accepted record count. At most one
+controller subasset enumeration and explicit atlas/material reads occur. Atlas,
+material and controller clip records also count toward the report budget.
+
+Sampling accepts 1..16 times. Before constructing samples it checks the combined
+bone, slot, skin, attachment, animation and selected-timeline record count and
+the sample output product against `maxRecords`. Summed weighted vertex storage
+and selected animation frame storage are each at most 65536 elements. Worst
+case is 16 independent poses, at most 1048576 vertex-element visits and the
+bounded selected-timeline applications. There is one skeleton, one reusable
+vertex buffer and at most 8192 returned records; source data remains shared and
+immutable. All calls execute synchronously on the Editor main thread, with no
+worker Unity access, persistent cache or per-frame loop. CLI budget: 30 seconds.
+
+Frozen Warrior sampling uses five times per animation: at most 8 * 5 * 15 = 600
+slot observations and 8 * 5 * 16 = 640 bone observations, in eight sequential
+requests. Every attachment is a region, so one pose visits at most 15 * 8 = 120
+vertex elements. Across all requests that is at most 4800 vertex elements.
+
+The focused tests construct one bone, one slot, one skin, two region attachments
+and one attachment timeline. They perform at most three poses and no Unity asset
+scan. Status: PASS for the frozen inventory and declared accepted domains.

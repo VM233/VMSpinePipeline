@@ -1,0 +1,13 @@
+{
+  "name": "com.vm233.spine-pipeline",
+  "version": "0.1.0",
+  "displayName": "VM Spine Pipeline",
+  "description": "Typed Spine 4.2 inspection and pose-sampling tools for the official Unity CLI through VM Unity Automation.",
+  "unity": "6000.4",
+  "type": "tool",
+  "author": { "name": "VM233", "url": "https://github.com/VM233" },
+  "repository": { "type": "git", "url": "https://github.com/VM233/VMSpinePipeline.git" },
+  "license": "MIT",
+  "dependencies": { "com.vm233.unity-automation": "0.6.69" },
+  "keywords": ["spine", "unity", "cli", "pipeline", "automation", "editor"]
+}

@@ -1,0 +1,7 @@
+{
+  "name": "VMSpinePipeline.Editor",
+  "rootNamespace": "VMSpinePipeline.Editor",
+  "references": ["VMUnityAutomation.Editor", "spine-csharp", "spine-unity"],
+  "includePlatforms": ["Editor"],
+  "autoReferenced": true
+}
