@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.2
+
+- Keep each typed request and result in its own source file for code policy review.
+- Cover inherited bone world rotation in the focused Editor tests.
+
 ## 0.1.1
 
 - Report sampled bone rotation in skeleton-local world space, alongside world X/Y.

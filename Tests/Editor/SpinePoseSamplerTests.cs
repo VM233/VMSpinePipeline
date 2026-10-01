@@ -38,6 +38,17 @@ namespace VMSpinePipeline.Editor.Tests
         }
 
         [Test]
+        public void BonePoseRotationIncludesTheParentRotation()
+        {
+            SkeletonData data = CreateData();
+            BoneData root = data.Bones.Items[0];
+            root.Rotation = 21;
+            data.Bones.Add(new BoneData(1, "child", root) { Rotation = 35 });
+            PoseRecord pose = SpinePoseSampler.Sample(data, Request(0.5f)).poses[0];
+            Assert.That(pose.bones[1].rotation, Is.EqualTo(56).Within(0.0001f));
+        }
+
+        [Test]
         public void HiddenSkeletonPoseReportsEmptyGeometryWithoutNonFiniteBounds()
         {
             SkeletonData data = CreateData();
