@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Spine;
 using VMUnityAutomation.Editor;
@@ -41,7 +42,7 @@ namespace VMSpinePipeline.Editor
             int records = CountRecords(data) + animation.Timelines.Count +
                           request.times.Length * (data.Bones.Count + data.Slots.Count + 2);
             RequireBudget(records, request.maxRecords);
-            RequireGeometryBudget(data, animation);
+            RequireGeometryBudget(data, new[] { animation });
             foreach (float time in request.times)
                 if (float.IsNaN(time) || float.IsInfinity(time) || time < 0 || time > animation.Duration)
                     throw new VmProjectToolException("spine_sample_time_invalid", $"Sample time {time} is outside animation duration 0..{animation.Duration}.");
@@ -83,7 +84,7 @@ namespace VMSpinePipeline.Editor
             };
         }
 
-        private static void RequireGeometryBudget(SkeletonData data, Spine.Animation animation)
+        internal static void RequireGeometryBudget(SkeletonData data, IEnumerable<Spine.Animation> animations)
         {
             long vertices = 0;
             foreach (Skin skin in data.Skins)
@@ -93,8 +94,9 @@ namespace VMSpinePipeline.Editor
                     else if (entry.Attachment is RegionAttachment)
                         vertices += 8;
             long frames = 0;
-            foreach (Timeline timeline in animation.Timelines)
-                frames += timeline.Frames.Length;
+            foreach (Spine.Animation animation in animations)
+                foreach (Timeline timeline in animation.Timelines)
+                    frames += timeline.Frames.Length;
             if (vertices > MaximumGeometryElements || frames > MaximumGeometryElements)
                 throw new VmProjectToolException("spine_budget_exceeded", $"Geometry elements {vertices} and timeline frame elements {frames} must each be <= {MaximumGeometryElements}.");
         }

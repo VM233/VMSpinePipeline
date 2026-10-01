@@ -1,6 +1,7 @@
 # VM Spine Pipeline
 
-Editor tools for inspecting Spine skeleton data and sampling animation poses
+Editor tools for inspecting Spine skeleton data and sampling animation poses,
+including paused live SkeletonMecanim states,
 through the official Unity CLI, VM Unity Pipeline and VM Unity Automation.
 Package ID: `com.vm233.spine-pipeline`.
 
@@ -16,6 +17,9 @@ Pin the same Automation dependency used by your project before package resolutio
 `Editor/` owns the tools and typed contracts. `Tests/Editor/` contains focused
 EditMode tests. Discover this package through `vm_catalog_list` using the package
 ID, then request one exact contract with `vm_catalog_get` before invoking it.
+
+The two skeleton-data readers are read-only. The live Mecanim sampler changes
+only the paused runtime pose, with an explicit component ID and state name.
 
 See [Integration](Documentation~/Integration.md),
 [Cost ledger](Documentation~/StaticCostLedger.md), [CHANGELOG](CHANGELOG.md),

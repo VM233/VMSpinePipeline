@@ -30,3 +30,16 @@ vertex elements. Across all requests that is at most 4800 vertex elements.
 The focused tests construct one bone, one slot, one skin, two region attachments
 and one attachment timeline. They perform at most three poses and no Unity asset
 scan. Status: PASS for the frozen inventory and declared accepted domains.
+
+Live Mecanim sampling resolves exactly one object through Automation's object ID
+owner. Its accepted domain is paused Play Mode, one active SkeletonMecanim and one
+flat AnimatorController layer with direct AnimationClip motions. It admits only
+metadata, state, parameter, timeline and output records within maxRecords, and the
+same 65536 geometry/frame-element budgets. No hierarchy or asset scan occurs.
+The native Animator and Spine owners each update once with delta time zero; one
+mesh update follows. No frame waiting, retries or texture cloning is introduced.
+Frozen Warrior: one layer, six states, fewer than ten parameters, 16 bones, 15 slots,
+eight animations, 18 source entries, ten equipment variants and 207 source keyframes.
+Each call returns fifteen slot records and one world XY bound. External gameplay
+callbacks retain their own budgets; the current equipment callback visits at most
+seven hidden slots. Status: PASS for the frozen inventory and admitted domains.

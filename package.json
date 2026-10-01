@@ -1,6 +1,6 @@
 {
   "name": "com.vm233.spine-pipeline",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "displayName": "VM Spine Pipeline",
   "description": "Typed Spine 4.2 inspection and pose-sampling tools for the official Unity CLI through VM Unity Automation.",
   "unity": "6000.4",

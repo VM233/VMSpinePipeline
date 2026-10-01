@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.0
+
+- Sample live, paused SkeletonMecanim states through the actual Animator, Spine
+  callbacks and mesh owners, with rendered bounds and material/texture identities.
+- Limit live sampling to one flat AnimatorController layer with direct clips.
+
 ## 0.1.2
 
 - Keep each typed request and result in its own source file for code policy review.
