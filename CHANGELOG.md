@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.1
+
+- Report sampled bone rotation in skeleton-local world space, alongside world X/Y.
+- Normalize new package metadata without changing GUIDs.
+
 ## 0.1.0
 
 - Add typed skeleton-data inspection, including bones, slots, skins, attachment

@@ -66,7 +66,7 @@ namespace VMSpinePipeline.Editor
                         : new BoundsRecord(),
                     bones = skeleton.Bones.Select(b => new BonePoseRecord
                     {
-                        name = b.Data.Name, worldX = b.WorldX, worldY = b.WorldY, rotation = b.Rotation
+                        name = b.Data.Name, worldX = b.WorldX, worldY = b.WorldY, rotation = b.WorldRotationX
                     }).ToArray(),
                     slots = skeleton.Slots.Select(s => new SlotPoseRecord
                     {

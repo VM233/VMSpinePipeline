@@ -22,6 +22,7 @@ attachment geometry. Loaded scene instances, equipment remapping, clipping,
 rendered pixels and gameplay require their own production validation.
 When every slot has no renderable attachment, `hasGeometry` is false and the
 reported bounds are zero. Bone poses still describe the sampled skeleton.
+Sampled bone rotation is the world X-axis rotation in this same coordinate space.
 
 The sample skin, animation and time range must exist in the selected data.
 `maxRecords` is an explicit report budget: the operation fails rather than
