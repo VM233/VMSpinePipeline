@@ -12,5 +12,12 @@ namespace VMSpinePipeline.Editor
         [VmRequired] public float y;
         [VmRequired] public float width;
         [VmRequired] public float height;
+        [VmRequired] public float rotation;
+        [VmRequired] public float scaleX;
+        [VmRequired] public float scaleY;
+        [VmRequired] public bool weighted;
+        [VmRequired] public bool linkedMesh;
+        [VmRequired] public int vertexCount;
+        [VmRequired] public int triangleCount;
     }
 }

@@ -11,6 +11,11 @@ Use the catalog as the authoritative list and schema reference.
 
 Skeleton inspection reads one `SkeletonDataAsset`, its parsed Spine data, explicit
 atlas/material references and the clips stored in its assigned Animator controller.
+Region records include authored rotation and scale. Region and Mesh records
+include vertex/triangle counts; Mesh records report weighted and linked state.
+Mesh width and height are optional authoring dimensions loaded in skeleton units,
+not deformed bounds. Transform fields (x/y/rotation/scale) apply to Region
+attachments and remain zero for Mesh attachments, which use vertex and bone data.
 It does not reimport data, regenerate clips, repair references or create resources.
 An empty controller path is reported when the authoring asset has no controller.
 
@@ -46,6 +51,9 @@ then invokes the real Animator and Spine update and mesh owners. Equipment
 UpdateLocal callbacks run normally. The requested pose remains paused for a
 Game-view capture. The result reports the confirmed state, rendered world bounds,
 mesh vertex count, current slot offsets and canonical texture/material identities.
+Both Region and Mesh material identities come from Spine's native texture-region
+owner. Mesh topology flags distinguish weighted source geometry and linked runtime
+equipment clones. The tool does not flatten or copy the mesh's authored weights.
 It does not save a scene or asset. Resume ordinary gameplay, sample idle, or exit
 Play Mode after the inspection. All skeleton metadata, controller records and
 timeline counts share the explicit maxRecords budget; geometry and timeline frame

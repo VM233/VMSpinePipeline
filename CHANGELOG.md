@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.0
+
+- Report weighted and linked Mesh attachment topology and dimensions in skeleton
+  inspection and live Mecanim samples. Preserve Region rotation and scale metadata.
+- Resolve live Mesh material and texture identities through Spine's native
+  IHasTextureRegion owner; Mesh slots no longer report empty resource identities.
+- Cover weighted source metadata and linked Mesh resource sharing in focused tests.
+
 ## 0.2.0
 
 - Sample live, paused SkeletonMecanim states through the actual Animator, Spine

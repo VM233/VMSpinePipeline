@@ -1,6 +1,7 @@
 using System;
 using NUnit.Framework;
 using Spine;
+using UnityEngine;
 using VMUnityAutomation.Editor;
 
 namespace VMSpinePipeline.Editor.Tests
@@ -69,6 +70,73 @@ namespace VMSpinePipeline.Editor.Tests
             Assert.That(schema["required"], Does.Contain("skinName"));
             Assert.That(schema["required"], Does.Contain("animationName"));
             Assert.That(schema["required"], Does.Contain("times"));
+        }
+
+        [Test]
+        public void WeightedMeshMetadataAndIndependentBoundsUseNativeGeometry()
+        {
+            SkeletonData data = CreateData();
+            MeshAttachment mesh = WeightedMesh();
+            data.DefaultSkin.SetAttachment(0, "attack-weapon", mesh);
+            foreach (var entry in data.DefaultSkin.Attachments)
+            {
+                if (entry.Name != "attack-weapon") continue;
+                AttachmentRecord record = SpineSkeletonDataTools.ReadAttachment(data, entry);
+                Assert.That(record.type, Is.EqualTo("MeshAttachment"));
+                Assert.That(record.weighted, Is.True);
+                Assert.That(record.linkedMesh, Is.False);
+                Assert.That(record.vertexCount, Is.EqualTo(3));
+                Assert.That(record.triangleCount, Is.EqualTo(1));
+                Assert.That(record.width, Is.EqualTo(2));
+                Assert.That(record.height, Is.EqualTo(3));
+            }
+            PoseRecord pose = SpinePoseSampler.Sample(data, Request(0.5f)).poses[0];
+            Assert.That(pose.hasGeometry, Is.True);
+            Assert.That(pose.bounds.width, Is.EqualTo(2).Within(0.0001f));
+            Assert.That(pose.bounds.height, Is.EqualTo(2).Within(0.0001f));
+            Assert.That(mesh.Vertices, Is.EqualTo(new[] { -1f, -1f, 1f, -1f, 1f, 1f, 1f, 1f, 1f }));
+        }
+
+        [Test]
+        public void LinkedWeightedMeshSlotReportsItsActualMaterialAndTexture()
+        {
+            var texture = new Texture2D(2, 2) { name = "Spine Mesh Inspection Test" };
+            var material = new Material(Shader.Find("Hidden/InternalErrorShader")) { mainTexture = texture };
+            try
+            {
+                MeshAttachment source = WeightedMesh();
+                source.Region = new AtlasRegion { page = new AtlasPage { rendererObject = material } };
+                MeshAttachment linked = source.NewLinkedMesh();
+                Slot slot = new Skeleton(CreateData()).Slots.Items[0];
+                slot.Attachment = linked;
+                MecanimSlotRecord record = SpineMecanimTools.ReadSlot(slot);
+                Assert.That(record.weighted, Is.True);
+                Assert.That(record.linkedMesh, Is.True);
+                Assert.That(record.vertexCount, Is.EqualTo(3));
+                Assert.That(record.triangleCount, Is.EqualTo(1));
+                Assert.That(record.textureName, Is.EqualTo(texture.name));
+                Assert.That(record.materialInstanceId, Is.EqualTo(VmObjectId.Get(material)));
+                Assert.That(record.textureInstanceId, Is.EqualTo(VmObjectId.Get(texture)));
+                Assert.That(linked.Bones, Is.SameAs(source.Bones));
+                Assert.That(linked.Vertices, Is.SameAs(source.Vertices));
+            }
+            finally
+            {
+                UnityEngine.Object.DestroyImmediate(material);
+                UnityEngine.Object.DestroyImmediate(texture);
+            }
+        }
+
+        private static MeshAttachment WeightedMesh()
+        {
+            return new MeshAttachment("attack-weapon")
+            {
+                Width = 2, Height = 3, WorldVerticesLength = 6,
+                Bones = new[] { 1, 0, 1, 0, 1, 0 },
+                Vertices = new[] { -1f, -1f, 1f, -1f, 1f, 1f, 1f, 1f, 1f },
+                RegionUVs = new[] { 0f, 0f, 0f, 1f, 1f, 1f },
+                Triangles = new[] { 0, 1, 2 }
+            };
         }
 
         private static SkeletonPoseRequest Request(params float[] times)

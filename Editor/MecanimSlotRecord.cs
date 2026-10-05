@@ -16,6 +16,10 @@ namespace VMSpinePipeline.Editor
         [VmRequired] public float scaleY;
         [VmRequired] public float width;
         [VmRequired] public float height;
+        [VmRequired] public bool weighted;
+        [VmRequired] public bool linkedMesh;
+        [VmRequired] public int vertexCount;
+        [VmRequired] public int triangleCount;
         [VmRequired] public string textureName;
         [VmRequired] public string textureInstanceId;
         [VmRequired] public string materialInstanceId;

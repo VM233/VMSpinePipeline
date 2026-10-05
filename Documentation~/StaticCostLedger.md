@@ -1,5 +1,21 @@
 # Static Cost Ledger
 
+## Weighted Mesh inspection addition (2026-10-06)
+
+Frozen replacement: 19 bones, 15 slots, one skin, 18 attachments, 12 animations;
+Weapon/8-1 is a weighted mesh with 16 vertices and 16 triangles. Metadata reads
+add only scalar array lengths, nullable parent identity and the existing native
+IHasTextureRegion reference. No vertex traversal, copying, hierarchy scan or
+cache is added. The existing maxRecords and response size owners still bound
+record materialization. Region transforms remain region-only; mesh dimensions
+are Spine metadata in imported skeleton units, not transformed bounds. The
+independent pose sampler remains the authority for geometry bounds.
+
+Two focused tests use one three-vertex weighted mesh, one linked clone, one slot,
+one temporary material and one 2x2 texture. Native material and texture lifecycles
+are paired. Tests perform one metadata read and one slot read each; retained
+arrays and records remain below 8 KiB. PASS.
+
 Frozen migration inventory: one Warrior dataset, old/new bones 19/16, slots 10/15,
 skins 3/1, skin entries 17/18 and animations 8/8. New animation keyframes total
 207; the largest individual animation contains 34 keyframes. The source export

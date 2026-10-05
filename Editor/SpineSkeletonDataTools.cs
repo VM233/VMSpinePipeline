@@ -123,7 +123,7 @@ namespace VMSpinePipeline.Editor
             };
         }
 
-        private static AttachmentRecord ReadAttachment(SkeletonData data, Skin.SkinEntry entry)
+        internal static AttachmentRecord ReadAttachment(SkeletonData data, Skin.SkinEntry entry)
         {
             var result = new AttachmentRecord
             {
@@ -134,6 +134,17 @@ namespace VMSpinePipeline.Editor
             {
                 result.x = region.X; result.y = region.Y;
                 result.width = region.Width; result.height = region.Height;
+                result.rotation = region.Rotation;
+                result.scaleX = region.ScaleX; result.scaleY = region.ScaleY;
+                result.vertexCount = 4; result.triangleCount = 2;
+            }
+            else if (entry.Attachment is MeshAttachment mesh)
+            {
+                result.width = mesh.Width; result.height = mesh.Height;
+                result.weighted = mesh.Bones != null;
+                result.linkedMesh = mesh.ParentMesh != null;
+                result.vertexCount = mesh.WorldVerticesLength / 2;
+                result.triangleCount = mesh.Triangles.Length / 3;
             }
             return result;
         }

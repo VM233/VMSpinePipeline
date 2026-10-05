@@ -79,10 +79,11 @@ namespace VMSpinePipeline.Editor
             };
         }
 
-        private static MecanimSlotRecord ReadSlot(Slot slot)
+        internal static MecanimSlotRecord ReadSlot(Slot slot)
         {
             var attachment = slot.Attachment as RegionAttachment;
-            var region = attachment?.Region as AtlasRegion;
+            var mesh = slot.Attachment as MeshAttachment;
+            var region = (slot.Attachment as IHasTextureRegion)?.Region as AtlasRegion;
             var material = region?.page?.rendererObject as Material;
             var texture = material?.mainTexture;
             return new MecanimSlotRecord
@@ -92,7 +93,11 @@ namespace VMSpinePipeline.Editor
                 attachmentType = slot.Attachment?.GetType().Name ?? "",
                 x = attachment?.X ?? 0, y = attachment?.Y ?? 0, rotation = attachment?.Rotation ?? 0,
                 scaleX = attachment?.ScaleX ?? 0, scaleY = attachment?.ScaleY ?? 0,
-                width = attachment?.Width ?? 0, height = attachment?.Height ?? 0,
+                width = attachment?.Width ?? mesh?.Width ?? 0,
+                height = attachment?.Height ?? mesh?.Height ?? 0,
+                weighted = mesh?.Bones != null, linkedMesh = mesh?.ParentMesh != null,
+                vertexCount = mesh == null ? attachment == null ? 0 : 4 : mesh.WorldVerticesLength / 2,
+                triangleCount = mesh == null ? attachment == null ? 0 : 2 : mesh.Triangles.Length / 3,
                 textureName = texture?.name ?? "", textureInstanceId = texture == null ? "" : VmObjectId.Get(texture),
                 materialInstanceId = material == null ? "" : VmObjectId.Get(material)
             };
