@@ -63,3 +63,19 @@ Enable the package's test assembly through the project's UPM `testables` list wh
 running the focused `VMSpinePipeline.Editor.Tests` fixtures.
 Linked Mesh inspection tests use a texture-capable native Sprite shader and a
 valid atlas region; the material's actual texture binding is asserted first.
+
+## Mesh equipment
+
+`Runtime/SpineMeshRectangle.Expand` prepares bone-driven meshes for rectangular
+equipment Sprites. It preserves authored vertex records and triangles, adding
+four outer vertices and exterior triangles. Pass an independent setup-pose Slot;
+cache the result with the skeleton binding and remap Sprites through Spine's
+native attachment tools. Vertex-deform timelines and sequences are explicitly
+unsupported. The source skeleton and its assets are not modified.
+
+`spine/inspect-mesh-sprite-coverage` compares native Sprite alpha coverage before
+and after expansion and samples the original vertices under explicit animation
+times. It reports the expanded UV topology and exact original-vertex errors.
+These readers are read-only; the live Mecanim sampler changes only the paused
+runtime pose, with an explicit component ID and state name.
+See the [geometry contract and cost ledger](MeshRectangleCostLedger.md).

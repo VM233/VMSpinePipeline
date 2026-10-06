@@ -1,6 +1,6 @@
 {
   "name": "com.vm233.spine-pipeline",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "displayName": "VM Spine Pipeline",
   "description": "Spine 4.2 inspection, pose and Sprite mesh coverage tools for the official Unity CLI, with bone-driven runtime mesh rectangle expansion.",
   "unity": "6000.4",
@@ -8,6 +8,6 @@
   "author": { "name": "VM233", "url": "https://github.com/VM233" },
   "repository": { "type": "git", "url": "https://github.com/VM233/VMSpinePipeline.git" },
   "license": "MIT",
-  "dependencies": { "com.vm233.unity-automation": "0.6.69" },
+  "dependencies": { "com.vm233.unity-automation": "0.6.136" },
   "keywords": ["spine", "unity", "cli", "pipeline", "automation", "editor"]
 }

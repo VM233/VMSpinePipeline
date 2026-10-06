@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.1
+
+- Align the shared Automation minimum with 0.6.136, including foreground-window
+  observations in rejected native capture receipts. Keep detailed geometry usage
+  in Integration rather than the first-adoption README.
+
 ## 0.4.0
 
 - Expand bone-driven mesh templates to the full Sprite rectangle while preserving
