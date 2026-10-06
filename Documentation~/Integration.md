@@ -61,3 +61,5 @@ storage are limited to 65,536 elements each.
 
 Enable the package's test assembly through the project's UPM `testables` list when
 running the focused `VMSpinePipeline.Editor.Tests` fixtures.
+Linked Mesh inspection tests use a texture-capable native Sprite shader and a
+valid atlas region; the material's actual texture binding is asserted first.

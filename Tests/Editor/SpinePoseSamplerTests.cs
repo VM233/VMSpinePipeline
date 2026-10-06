@@ -100,12 +100,22 @@ namespace VMSpinePipeline.Editor.Tests
         [Test]
         public void LinkedWeightedMeshSlotReportsItsActualMaterialAndTexture()
         {
+            var shader = Shader.Find("Sprites/Default");
+            Assert.That(shader, Is.Not.Null);
             var texture = new Texture2D(2, 2) { name = "Spine Mesh Inspection Test" };
-            var material = new Material(Shader.Find("Hidden/InternalErrorShader")) { mainTexture = texture };
+            var material = new Material(shader);
             try
             {
+                Assert.That(material.HasProperty("_MainTex"), Is.True);
+                material.mainTexture = texture;
+                Assert.That(material.mainTexture, Is.SameAs(texture));
                 MeshAttachment source = WeightedMesh();
-                source.Region = new AtlasRegion { page = new AtlasPage { rendererObject = material } };
+                source.Region = new AtlasRegion
+                {
+                    width = 2, height = 2, originalWidth = 2, originalHeight = 2,
+                    u = 0, v = 0, u2 = 1, v2 = 1,
+                    page = new AtlasPage { width = 2, height = 2, rendererObject = material }
+                };
                 MeshAttachment linked = source.NewLinkedMesh();
                 Slot slot = new Skeleton(CreateData()).Slots.Items[0];
                 slot.Attachment = linked;

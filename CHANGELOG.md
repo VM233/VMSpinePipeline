@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.1
+
+- Use a texture-capable native shader and valid atlas dimensions in the linked
+  Mesh fixture, and verify its actual texture binding before inspecting the slot.
+  Unity's internal error shader does not provide the required texture property.
+
 ## 0.3.0
 
 - Report weighted and linked Mesh attachment topology and dimensions in skeleton
