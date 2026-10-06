@@ -1,6 +1,6 @@
 {
   "name": "VMSpinePipeline.Editor.Tests",
-  "references": ["VMSpinePipeline.Editor", "VMUnityAutomation.Editor", "spine-csharp"],
+  "references": ["VMSpinePipeline.Editor", "VMSpinePipeline.Runtime", "VMUnityAutomation.Editor", "spine-csharp"],
   "includePlatforms": ["Editor"],
   "optionalUnityReferences": ["TestAssemblies"]
 }

@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.4.0
+
+- Expand bone-driven mesh templates to the full Sprite rectangle while preserving
+  authored vertex weights, UVs and triangles. Runtime geometry belongs to the
+  skeleton binding; the source export remains unchanged.
+- Add a typed read-only mesh/Sprite coverage command with native alpha coverage,
+  complete expanded UV topology and original-vertex preservation across animation
+  samples. Reject incompatible vertex-deform and sequence authoring explicitly.
+- Cover concave boundary filling, weighted bone motion, linked source identity,
+  unsupported deform authoring and the closed CLI request contract.
+
 ## 0.3.1
 
 - Use a texture-capable native shader and valid atlas dimensions in the linked

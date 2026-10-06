@@ -1,8 +1,8 @@
 {
   "name": "com.vm233.spine-pipeline",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "displayName": "VM Spine Pipeline",
-  "description": "Typed Spine 4.2 inspection and pose-sampling tools for the official Unity CLI through VM Unity Automation.",
+  "description": "Spine 4.2 inspection, pose and Sprite mesh coverage tools for the official Unity CLI, with bone-driven runtime mesh rectangle expansion.",
   "unity": "6000.4",
   "type": "tool",
   "author": { "name": "VM233", "url": "https://github.com/VM233" },

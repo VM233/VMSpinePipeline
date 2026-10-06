@@ -1,0 +1,6 @@
+{
+  "name": "VMSpinePipeline.Runtime",
+  "rootNamespace": "VMSpinePipeline",
+  "references": ["spine-csharp"],
+  "autoReferenced": true
+}

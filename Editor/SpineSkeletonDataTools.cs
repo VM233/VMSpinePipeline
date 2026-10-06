@@ -84,7 +84,7 @@ namespace VMSpinePipeline.Editor
             return SpinePoseSampler.Sample(Read(Load(request.assetPath)), request);
         }
 
-        private static SkeletonDataAsset Load(string path)
+        internal static SkeletonDataAsset Load(string path)
         {
             SkeletonDataAsset asset = AssetDatabase.LoadAssetAtPath<SkeletonDataAsset>(path);
             if (asset == null)
@@ -92,7 +92,7 @@ namespace VMSpinePipeline.Editor
             return asset;
         }
 
-        private static SkeletonData Read(SkeletonDataAsset asset)
+        internal static SkeletonData Read(SkeletonDataAsset asset)
         {
             SkeletonData data = asset.GetSkeletonData(false);
             if (data == null)

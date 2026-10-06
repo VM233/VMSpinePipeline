@@ -3,7 +3,7 @@
 ## Weighted Mesh inspection addition (2026-10-06)
 
 Frozen replacement: 19 bones, 15 slots, one skin, 18 attachments, 12 animations;
-Weapon/8-1 is a weighted mesh with 16 vertices and 16 triangles. Metadata reads
+Weapon/8-1 is a weighted mesh with 16 vertices and 19 triangles. Metadata reads
 add only scalar array lengths, nullable parent identity and the existing native
 IHasTextureRegion reference. No vertex traversal, copying, hierarchy scan or
 cache is added. The existing maxRecords and response size owners still bound
