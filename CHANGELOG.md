@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.2
+
+- Require Automation 0.6.260 so JSON DOM values in project-tool result products
+  use the shared logical JSON response owner. Spine contracts are unchanged.
+
 ## 0.4.1
 
 - Align the shared Automation minimum with 0.6.136, including foreground-window
